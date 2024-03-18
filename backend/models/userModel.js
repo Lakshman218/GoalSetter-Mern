@@ -19,6 +19,14 @@ const userSchema = mongoose.Schema(
       type:String,
       default:"https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg"
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    isBlock:{
+      type:Boolean,
+      default:false,
+    },
   },
   {
     timestamps: true,

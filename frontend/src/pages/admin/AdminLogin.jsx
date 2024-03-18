@@ -1,67 +1,68 @@
+import React from 'react'
 import { useState, useEffect } from 'react'
-import { FaSignInAlt } from 'react-icons/fa'
+import { FaUser } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { login, reset } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
+import { adminLogin, reset } from '../../features/adminAuth/adminAuthSlice'
+import Spinner from '../../components/Spinner'  
 
-function Login() {
+
+function AdminLogin() {
+  
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   })
 
-  const { email, password } = formData
+  const { email, password } = formData;
+  console.log("admin login called", email, password);
+    
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  )
+  const { admin, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.adminAuth
+  );
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
+      console.log("error");
     }
-
-    if (isSuccess || user) {
-      navigate('/')
+    if (isSuccess || admin) {
+      navigate("/admin");
     }
-
-    dispatch(reset())
-  }, [user, isError, isSuccess, message, navigate, dispatch])
+    dispatch(reset());
+  }, [admin, isError, isSuccess, dispatch, message, navigate]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
-
-    const userData = {
+    e.preventDefault();
+    const adminData = {
       email,
       password,
-    }
-    
-    dispatch(login(userData))
-  }
+    };
+    dispatch(adminLogin(adminData));
+  };
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
-
+  
   return (
-    <>
-      <section className='heading'>
+    <div className='adminLogin-card'>
+      <section className="heading">
         <h1>
-          <FaSignInAlt /> Login
+          <FaUser /> Admin Login
         </h1>
-        <p>Login and start setting goals</p>
+        <p>Authorized login only</p>
       </section>
 
       <section className='form'>
@@ -96,8 +97,8 @@ function Login() {
           </div>
         </form>
       </section>
-    </>
+    </div>
   )
 }
 
-export default Login
+export default AdminLogin

@@ -44,10 +44,12 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 })
 
 // Edit User 
-export const editUser = createAsyncThunk('auth/editUser', async ({userId, name, email}, thunkAPI) => {
+export const editUser = createAsyncThunk(
+  'auth/editUser', async ({userId, name, email}, thunkAPI) => {
   try {
       const token = thunkAPI.getState().auth.user.token
-
+      console.log("tokengfgf", token);
+  console.log("edit in authslice",userId,name,email);
       return await authService.editUserDetails(token, userId, name, email)
   } catch (error) {
       alert(error)
@@ -59,6 +61,7 @@ export const editUser = createAsyncThunk('auth/editUser', async ({userId, name, 
 // User Profile Update
 export const profileUpdate = createAsyncThunk('auth/profile', async(profileUrl,thunkAPI) => {
   try {
+    console.log("user profileurl",profileUrl);
       const token = thunkAPI.getState().auth.user.token
       return await authService.profileUpload(token, profileUrl)
   } catch (error) {

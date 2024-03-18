@@ -48,6 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
 // login
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
+  console.log("user logged");
 
   // Check for user email
   const user = await User.findOne({ email })
@@ -74,6 +75,8 @@ const getMe = asyncHandler(async (req, res) => {
 //edit user
 const editUser=asyncHandler(async(req,res)=>{
   const {userId,name,email}=req.body
+  console.log("headers",req.headers);
+  console.log("edit in controller",userId,name,email);
   const user=await User.findByIdAndUpdate(userId,{name,email},{new:true})
 
   if(user){
@@ -100,6 +103,7 @@ const generateToken = (id) => {
 //photo url upload
 const profileUpload = asyncHandler(async (req, res) => {
   const url = req.body.url;
+  console.log("profile url",url);
 
   const user = await User.findByIdAndUpdate(req.user.id, {
     profileUrl: url

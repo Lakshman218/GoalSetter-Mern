@@ -31,11 +31,13 @@ const logout = () => {
 
 //edit user deatils
 const editUserDetails=async(token,userId,name,email)=>{
+  console.log("token",token);
   const config={
       headers:{
           Authorization:`Bearer ${token}`
       }
   }
+console.log("edit in authservice",userId,name,email);
   const response=await axios.put(API_URL+userId,{userId,name,email},config)
   if(response.data){
     localStorage.setItem('user', JSON.stringify(response.data))
@@ -51,6 +53,7 @@ const profileUpload = async(token, url) => {
           Authorization: `Bearer ${token}`
       }
   }
+  console.log("profile url in service",url);
   const liveUser = JSON.parse(localStorage.getItem('user'))
   const response = await axios.post(API_URL + 'profile/upload',{url, liveUser}, config)
 
