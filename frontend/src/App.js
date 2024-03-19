@@ -8,6 +8,7 @@ import Register from './pages/Register'
 import Profile from './pages/Profile'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminLogin from './pages/admin/AdminLogin'
+import AddUser from './pages/admin/AddUser'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
 
             <Route path='/admin' element={<AdminDashboard />} />
             <Route path='/admin/login' element={<AdminLogin />}  />
+            <Route path='/admin/adduser' element={<AddUser />} />
             <Route  />
           </Routes>
         </div>

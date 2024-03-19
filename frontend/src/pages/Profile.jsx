@@ -75,11 +75,11 @@ function Profile() {
           </div>
 
           <div className="profile-buttons">
-            <button 
+            {/* <button 
               className='btn-1'
               onClick={()=>handleEdit(user._id, user.name, user.email)}
               >Edit Profile
-            </button>
+            </button> */}
 
             <div className="upload-button">
               <div class="custom-file-upload">

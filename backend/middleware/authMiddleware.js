@@ -42,6 +42,7 @@ const protectAdmin = asyncHandler(async(req, res, next) => {
     try {
       // get token from header
       token = req.headers.authorization.split(' ')[1]
+      console.log("token in midd",token);
 
       // verify
       const decoded = jwt.verify(token, process.env.JWT_SECRET)

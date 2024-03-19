@@ -49,12 +49,38 @@ const editUserDetails = async(token, userId, name, email) => {
   return response.data
 }
 
+// add user
+const addUser = async(userData, token) => {
+const config={
+  headers:{
+    Authorization: `Bearer ${token}`
+  }
+}
+const response = await axios.post(API_URL+'adduser', {userData}, config)
+return response.data
+}
+
+// search user
+const searchUser = async(query, token) => {
+  const config = {
+    headers:{
+      Authorization: `Bearer ${token}`
+    }
+  }
+  console.log("response", query);
+  const response = await axios.post(API_URL+'search', {query}, config)
+  console.log("responsedata", response.data);
+  return response.data
+}
+
 const adminAuthService = {
   adminLogin,
   adminLogout,
   getAllUsers,
   editUserDetails,  
   userBlock,
+  addUser,
+  searchUser,
 }
 
 export default adminAuthService
